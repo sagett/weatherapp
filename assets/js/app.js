@@ -1,4 +1,5 @@
 $(function () {
+  console.log('ready');
   function getWeather(city, callback) {
     var url = 'http://api.openweathermap.org/data/2.5/weather';
     $.ajax({
@@ -6,7 +7,7 @@ $(function () {
       url: url,
       jsonCallback: 'jsonp',
       data: { q: city },
-      cache: false,
+      cache: true,
       success: function (data) {
           data.city = city;
           callback(data);
@@ -14,5 +15,9 @@ $(function () {
       }
     });
   }
+
+  var cities = ['London', 'Berlin', 'New York', 'Tokyo', 'New Dehli', 'Moskau', 'Sydney'];
+
+
 
 });
