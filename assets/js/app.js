@@ -30,14 +30,14 @@ $(function () {
 		console.log('rCities', rCities);
     getWeather(rCities, function(returnedData) {
     	console.log('returnedData', returnedData)
-      showCity(url, cityName, apiKey, units);
+      getWeather(url, cityName, apiKey, units);
     })
   });
 
-  function showCity(data) {
+  /* function showCity(data) {
     return "<h3>Weather: "+ data.weather[0].main  +"</h3>" +
            "<h3>Weather: "+ data.weather[0].description  +"</h3>";
-  }
+  } */
 
   var prepareData = function(units) {
     var cityName = $('.cityName').val()
