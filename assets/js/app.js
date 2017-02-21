@@ -7,7 +7,7 @@ $(function () {
       dataType: "jsonp",
       url: url,
       jsonCallback: 'fetchData',
-      data: { q: city, APPID: apiKey },
+      data: { q: cityName, APPID: apiKey },
       cache: true,
       success: function (data) {
           data.city = city;
