@@ -1,13 +1,14 @@
 $(function () {
   console.log('ready');
+  var url = 'http://api.openweathermap.org/data/2.5/weather';
+  var apiKey = '4846f8ae0e168b5a24906e0c47ff92b5';
+
   function getWeather(url, cityName, apiKey, units) {
-    var url = 'http://api.openweathermap.org/data/2.5/weather';
-    var apiKey = '4846f8ae0e168b5a24906e0c47ff92b5';
     $.ajax({
       dataType: "jsonp",
       url: url,
       jsonCallback: 'fetchData',
-      data: { q: cityName, APPID: apiKey },
+      data: { q: cityName, APPID: apiKey, units: units },
       cache: true,
       success: function (data) {
           data.city = city;
@@ -30,7 +31,7 @@ $(function () {
 		console.log('rCities', rCities);
     getWeather(rCities, function(returnedData) {
     	console.log('returnedData', returnedData)
-      getWeather(url, cityName, apiKey, units);
+      getWeather(url, rCities, apiKey, units);
     })
   });
 
@@ -64,6 +65,7 @@ $(function () {
       forecast.list.forEach(function(forecastEntry, index, list) {
         html += '<p>' + forecastEntry.dt_txt + ': ' + forecastEntry.main.temp + '</p>';
       })
+      $('.weatherData').html(html);
   }
 
 
