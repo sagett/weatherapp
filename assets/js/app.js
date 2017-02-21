@@ -1,6 +1,6 @@
 $(function () {
   console.log('ready');
-  function getWeather(city, callback) {
+  function getWeather(url, cityName, apiKey, units) {
     var url = 'http://api.openweathermap.org/data/2.5/weather';
     var apiKey = '4846f8ae0e168b5a24906e0c47ff92b5';
     $.ajax({
@@ -30,7 +30,7 @@ $(function () {
 		console.log('rCities', rCities);
     getWeather(rCities, function(returnedData) {
     	console.log('returnedData', returnedData)
-      showCity();
+      showCity(url, cityName, apiKey, units);
     })
   });
 
