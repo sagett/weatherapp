@@ -12,12 +12,9 @@ $(function () {
       success: function (data) {
           _fetchData(data);
           console.log('sucess', data);
-          var widget = showCity(data);
-          $('.weatherData').html(widget);
       }
     }).fail(function(error) {
       console.error("Error", JSON.strigify(error));
-      //alert('Error sending request');
     });
   }
 
@@ -32,12 +29,6 @@ $(function () {
     });
   });
 
-/*
-   function showCity(data) {
-    return "<h3>Weather: "+ data.weather[0].main  +"</h3>" +
-           "<h3>Weather: "+ data.weather[0].description  +"</h3>";
-  }
-*/
 
 
   var prepareData = function(units) {
@@ -59,9 +50,10 @@ $(function () {
     console.log('forecast', forecast);
     var html = '',
     cityName = forecast.name,
-    country = forecast.country //sys.country
+    country = forecast.sys.country;
+    temp = forecast.main.temp;
 
-      html += '<h3> Weather Forecast for ' + cityName + ', ' + country + '</h3>'
+      html += '<h3> Weather Forecast for ' + cityName + ', ' + country + ' is ' + temp + '</h3>'
       /*forecast.list.forEach(function(forecastEntry, index, list) {
         html += '<p>' + forecastEntry.dt_txt + ': ' + forecastEntry.main.temp + '</p>';
       }) */
