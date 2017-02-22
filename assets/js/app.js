@@ -7,11 +7,9 @@ $(function () {
     $.ajax({
       dataType: "jsonp",
       url: url,
-      //jsonCallback: 'fetchData',
       data: { q: cityName, APPID: apiKey },
       cache: true,
       success: function (data) {
-          //data.city = city;
           _fetchData(data);
           console.log('sucess', data);
           var widget = showCity(data);
@@ -31,8 +29,6 @@ $(function () {
 		console.log("Cities length: " + Math.floor(Math.random()*cities.length));
     console.log("Random city: ", rCities);
     getWeather(url, rCities, apiKey, fetchData);
-    	//console.log('returnedData', fetchData);
-      //getWeather(url, rCities, apiKey);
     });
   });
 
