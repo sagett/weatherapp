@@ -2,7 +2,7 @@ $(function () {
   console.log('ready');
   var url = 'http://api.openweathermap.org/data/2.5/weather';
   var apiKey = '4846f8ae0e168b5a24906e0c47ff92b5';
-  var unit = '&units=metric';
+  var unit = 'metric';
 
   function getWeather(url, cityName, apiKey, _fetchData) {
     $.ajax({
@@ -56,7 +56,7 @@ $(function () {
     country = forecast.sys.country;
     temp = forecast.main.temp;
 
-      html += '<h3> Weather Forecast for ' + cityName + ', ' + country + ' is ' + temp + '</h3>'
+      html += '<h3> Weather Forecast for ' + cityName + ', ' + country + ' is ' + temp + ' Celsius</h3>'
       /*forecast.list.forEach(function(forecastEntry, index, list) {
         html += '<p>' + forecastEntry.dt_txt + ': ' + forecastEntry.main.temp + '</p>';
       }) */
