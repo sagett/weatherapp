@@ -27,7 +27,7 @@ $(function () {
     var rCities = cities[Math.floor(Math.random()*cities.length)];
 		console.log("Cities length: " + Math.floor(Math.random()*cities.length));
     console.log("Random city: ", rCities);
-    getWeather(url, rCities, apiKey, fetchData, unit);
+    getWeather(url, rCities, apiKey, fetchData);
     });
   });
 
