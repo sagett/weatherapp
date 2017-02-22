@@ -2,16 +2,18 @@ $(function () {
   console.log('ready');
   var url = 'http://api.openweathermap.org/data/2.5/weather';
   var apiKey = '4846f8ae0e168b5a24906e0c47ff92b5';
+  var unit = '&units=metric';
 
   function getWeather(url, cityName, apiKey, _fetchData) {
     $.ajax({
       dataType: "jsonp",
       url: url,
-      data: { q: cityName, APPID: apiKey },
+      data: { q: cityName, units: unit, APPID: apiKey },
       cache: true,
       success: function (data) {
           _fetchData(data);
           console.log('sucess', data);
+          console.log('URL: ', this.url);
       }
     }).fail(function(error) {
       console.error("Error", JSON.strigify(error));
@@ -25,13 +27,13 @@ $(function () {
     var rCities = cities[Math.floor(Math.random()*cities.length)];
 		console.log("Cities length: " + Math.floor(Math.random()*cities.length));
     console.log("Random city: ", rCities);
-    getWeather(url, rCities, apiKey, fetchData);
+    getWeather(url, rCities, apiKey, fetchData, unit);
     });
   });
 
 
 
-  var prepareData = function(units) {
+/*  var prepareData = function(units) {
     var cityName = $('.cityName').val()
     if (cityName && cityName != '') {
       cityName = cityName.trim()
@@ -41,10 +43,11 @@ $(function () {
     }
   }
 
+
   $('.btn-metric').click(function() {
     prepareData('metric');
   })
-
+*/
 
   function fetchData (forecast) {
     console.log('forecast', forecast);
