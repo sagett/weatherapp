@@ -3,23 +3,23 @@ $(function () {
   var url = 'http://api.openweathermap.org/data/2.5/weather';
   var apiKey = '4846f8ae0e168b5a24906e0c47ff92b5';
 
-  function getWeather(url, cityName, apiKey, units) {
+  function getWeather(url, cityName, apiKey, _fetchData) {
     $.ajax({
       dataType: "jsonp",
       url: url,
-      jsonCallback: 'fetchData',
-      data: { q: cityName, APPID: apiKey, units: units },
+      //jsonCallback: 'fetchData',
+      data: { q: cityName, APPID: apiKey },
       cache: true,
       success: function (data) {
-          data.city = city;
-          callback(data);
+          //data.city = city;
+          _fetchData(data);
           console.log('sucess', data);
           var widget = showCity(data);
           $('.weatherData').html(widget);
       }
     }).fail(function(error) {
-      console.error(error);
-      alert('Error sending request');
+      console.error("Error", JSON.strigify(error));
+      //alert('Error sending request');
     });
   }
 
@@ -28,17 +28,21 @@ $(function () {
 
   $('.random').click(function() {
     var rCities = cities[Math.floor(Math.random()*cities.length)];
-		console.log('rCities', rCities);
-    getWeather(rCities, function(returnedData) {
-    	console.log('returnedData', returnedData)
-      getWeather(url, rCities, apiKey, units);
-    })
+		console.log("Cities length: " + Math.floor(Math.random()*cities.length));
+    console.log("Random city: ", rCities);
+    getWeather(url, rCities, apiKey, fetchData);
+    	//console.log('returnedData', fetchData);
+      //getWeather(url, rCities, apiKey);
+    });
   });
 
-  /* function showCity(data) {
+/*
+   function showCity(data) {
     return "<h3>Weather: "+ data.weather[0].main  +"</h3>" +
            "<h3>Weather: "+ data.weather[0].description  +"</h3>";
-  } */
+  }
+*/
+
 
   var prepareData = function(units) {
     var cityName = $('.cityName').val()
@@ -58,16 +62,12 @@ $(function () {
   function fetchData (forecast) {
     console.log('forecast', forecast);
     var html = '',
-    cityName = forecast.city.name,
-    country = forecast.city.country //sys.country
+    cityName = forecast.name,
+    country = forecast.country //sys.country
 
-      html += '<h3> WEather Forecast for ' + cityName + ', ' + country + '</h3>'
-      forecast.list.forEach(function(forecastEntry, index, list) {
+      html += '<h3> Weather Forecast for ' + cityName + ', ' + country + '</h3>'
+      /*forecast.list.forEach(function(forecastEntry, index, list) {
         html += '<p>' + forecastEntry.dt_txt + ': ' + forecastEntry.main.temp + '</p>';
-      })
+      }) */
       $('.weatherData').html(html);
-  }
-
-
-
-});
+  };
