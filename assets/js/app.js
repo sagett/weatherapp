@@ -32,18 +32,6 @@ $(function () {
   });
 
 
-
-/*  var prepareData = function(units) {
-    var cityName = $('.cityName').val()
-    if (cityName && cityName != '') {
-      cityName = cityName.trim()
-      getWeather()
-    } else {
-      alert ('Please enter a city name');
-    }
-  }
-
-
   $('.btn-metric').click(function() {
     prepareData('metric');
   })
