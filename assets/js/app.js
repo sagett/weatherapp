@@ -5,15 +5,14 @@ $(function () {
 
   $('.random').click(function() {
     var rCities = cities[Math.floor(Math.random()*cities.length)];
-    console.log("Cities length: " + Math.floor(Math.random()*cities.length));
-    console.log("Random city: ", rCities);
+//    console.log("Cities length: " + Math.floor(Math.random()*cities.length));
+//    console.log("Random city: ", rCities);
     getWeather(url, rCities, apiKey, fetchData);
   });
 
   $('.btn-primary').click(function() {
-    console.log('click');
     var cityName = $('.cityname').val();
-    console.log('cityname', cityName);
+//    console.log('cityname', cityName);
     getWeather(url, cityName, apiKey, fetchData);
   })
 
@@ -43,7 +42,7 @@ function getWeather(url, cityName, apiKey, _fetchData) {
 
 
 function fetchData (forecast) {
-  console.log('forecast', forecast);
+  //  console.log('forecast', forecast);
   var html = '',
   cityName = forecast.name,
   country = forecast.sys.country;
