@@ -1,5 +1,6 @@
 $(function () {
 
+
   //Randomize cities
   var cities = ['London', 'Berlin', 'New York', 'Tokyo', 'New Dehli', 'Moskau', 'Sydney', 'Oakland', 'Los Angeles', 'Boston', 'Rome'];
 
