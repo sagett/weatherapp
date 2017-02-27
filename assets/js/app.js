@@ -32,10 +32,20 @@ function getWeather(url, cityName, apiKey, _fetchData) {
       _fetchData(data);
       console.log('sucess', data);
       console.log('URL: ', this.url);
+    },
+    statusCode: {
+    404: function() {
+      alert('page not found');
+    },
+    400: function() {
+      alert('bad request');
     }
+  },
   }).fail(function(error) {
     console.error("Error", JSON.strigify(error));
   });
+
+
 }
 
 
