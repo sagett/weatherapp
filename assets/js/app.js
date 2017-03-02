@@ -28,42 +28,30 @@ function getWeather(url, cityName, apiKey, _fetchData) {
     url: url,
     data: { q: cityName, units: unit, APPID: apiKey },
     cache: true,
-    success: function (data) {
+    success: function (data, xhr) {
       _fetchData(data);
-      console.log('sucess', data);
+      console.log('sucess', data), xhr.status;
       console.log('URL: ', this.url);
+
     },
-    error: function(jqXHR, exception) {
-            if (jqXHR.status === 0) {
-                alert('Not connect.\n Verify Network.');
-            } else if (jqXHR.status == 404) {
-                alert('Requested page not found. [404]');
-            } else if (jqXHR.status == 500) {
-                alert('Internal Server Error [500].');
-            } else if (exception === 'parsererror') {
-                alert('Requested JSON parse failed.');
-            } else if (exception === 'timeout') {
-                alert('Time out error.');
-            } else if (exception === 'abort') {
-                alert('Ajax request aborted.');
-            } else {
-                alert('Uncaught Error.\n' + jqXHR.responseText);
-            }
-        },
     statusCode: {
-    404: function() {
+    200: function(xhr) {
+      //console.log('200-ok');
+    },
+    404: function(xhr) {
       alert('page not found');
     },
-    400: function() {
+    400: function(xhr) {
       alert('bad request');
     },
-    500: function() {
+    500: function(xhr) {
       alert('no connection to server');
     },
-    502: function() {
+    502: function(xhr) {
       alert('bad gateway');
     },
-    503: function() {
+    503: function(xhr) {
+      console.log('503');
       alert('no internet connection');
     }
   },
@@ -84,3 +72,7 @@ function fetchData (forecast) {
   html += '<h3> Weather Forecast for ' + cityName + ', ' + country + ' is ' + temp + ' Celsius</h3>'
   $('.weatherData').html(html);
 };
+
+function erroremessage(){
+   alert('a problem occured');
+  }
