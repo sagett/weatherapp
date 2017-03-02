@@ -28,15 +28,18 @@ function getWeather(url, cityName, apiKey, _fetchData) {
     url: url,
     data: { q: cityName, units: unit, APPID: apiKey },
     cache: true,
-    success: function (data, xhr) {
+    success: function (data, status, xhr) {
       _fetchData(data);
       console.log('sucess', data), xhr.status;
       console.log('URL: ', this.url);
-
     },
-    statusCode: {
+    error: function(data, status, xhr) {
+      alert('a problem occured');
+    },
+
+  /*  statusCode: {
     200: function(xhr) {
-      //console.log('200-ok');
+      console.log('200-ok');
     },
     404: function(xhr) {
       alert('page not found');
@@ -54,9 +57,7 @@ function getWeather(url, cityName, apiKey, _fetchData) {
       console.log('503');
       alert('no internet connection');
     }
-  },
-  }).fail(function(error) {
-    console.error("Error", JSON.strigify(error));
+  },*/
   });
 
 
