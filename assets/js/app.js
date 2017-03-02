@@ -33,12 +33,38 @@ function getWeather(url, cityName, apiKey, _fetchData) {
       console.log('sucess', data);
       console.log('URL: ', this.url);
     },
+    error: function(jqXHR, exception) {
+            if (jqXHR.status === 0) {
+                alert('Not connect.\n Verify Network.');
+            } else if (jqXHR.status == 404) {
+                alert('Requested page not found. [404]');
+            } else if (jqXHR.status == 500) {
+                alert('Internal Server Error [500].');
+            } else if (exception === 'parsererror') {
+                alert('Requested JSON parse failed.');
+            } else if (exception === 'timeout') {
+                alert('Time out error.');
+            } else if (exception === 'abort') {
+                alert('Ajax request aborted.');
+            } else {
+                alert('Uncaught Error.\n' + jqXHR.responseText);
+            }
+        },
     statusCode: {
     404: function() {
       alert('page not found');
     },
     400: function() {
       alert('bad request');
+    },
+    500: function() {
+      alert('no connection to server');
+    },
+    502: function() {
+      alert('bad gateway');
+    },
+    503: function() {
+      alert('no internet connection');
     }
   },
   }).fail(function(error) {
