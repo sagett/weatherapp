@@ -30,11 +30,32 @@ function getWeather(url, cityName, apiKey, _fetchData) {
     cache: true,
     success: function (data, status, xhr) {
       _fetchData(data);
-      console.log('sucess', data), xhr.status;
+      console.log('sucess', xhr.status, data);
       console.log('URL: ', this.url);
     },
     error: function(data, status, xhr) {
-      alert('a problem occured');
+      console.log('error: ', xhr.status)
+
+      switch (xhr.status) {
+        case 404:
+        alert ('not found');
+        break;
+
+        case 400:
+        alert('bad request');
+        break;
+
+        case 500:
+        alert('no connection to server');
+        break;
+
+        case 502:
+        alert('Please enter valid city name');
+        break;
+
+        case 503:
+        alert('no internet connection');
+      }
     },
 
   /*  statusCode: {
